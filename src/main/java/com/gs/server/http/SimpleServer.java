@@ -1,5 +1,8 @@
 package com.gs.server.http;
 
+import com.gs.server.http.Util.IoUtils;
+import sun.nio.ch.IOUtil;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -29,13 +32,7 @@ public class SimpleServer implements Server {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if(socket != null) {
-                try {
-                    socket.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            IoUtils.closeQuietly(socket);
         }
 
 
